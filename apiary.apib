@@ -1,0 +1,90 @@
+FORMAT: 1A
+HOST: https://api.accredible.com/
+
+# Accredible Partner Reporting API
+Accredible Partner Reporting APIs are designed to cater to partners and third parties who require consolidated and detailed insights from multiple credential issuers. This feature enables partners to access aggregated usage data, individual level insights, and comprehensive transcript delivery reporting for issuers, partners, and recipients.
+
+## Report Requests [/v1/endorser/report_requests]
+
+### Request a report [POST]
+Request a report for endorsements.
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: string (required)
+    
+    + Attributes (object)
+        + report_request (object)
+            + report_name: (enum[string], required) - Type of report to generate
+                + Members
+                    + `endorsed_group` - Basic endorsed group report
+                    + `endorsed_group_analytics` - Detailed analytics for endorsed group
+                    + `transcripts` - Transcripts report
+                    + `quarterly` - Quarterly summary report
+            + start_date: (string, required) - Start date for the report data in YYYY-MM-DD format
+            + end_date: (string, required) - End date for the report data in YYYY-MM-DD format
+            + requester_emails: (array[string], required) - List of email addresses to receive the report (maximum 10 emails)
+            
+    + Body
+
+            {
+                "report_request": {
+                    "report_name": "endorsed_group",
+                    "start_date": "01-11-2024",
+                    "end_date": "01-12-2024"
+                    "requester_emails": ["john.doe@accredible.com"]
+                }
+            }
+
++ Response 200 (application/json)
+    + Body
+    
+        {
+            "report_request_id": 123,
+            "report_status": "REQUESTED"
+        }
+
++ Response 401 (application/json)
+    + Body
+    
+        {
+            "code": 401,
+            "message": "Invalid API Key",
+            "status": "unauthorized",
+            "errors"=>{}
+        }
+
++ Response 422 (application/json)
+    + Body
+    
+        {
+            "code": 422,
+            "message": "Invalid datetime: invalid",
+            "status": "unauthorized",
+            "errors"=>{}
+        }
+
++ Response 500 (application/json)
+    + Body
+    
+        {
+            "code": 500,
+            "message": "Something went wrong.",
+            "status": "failed_to_produce_report_request_event",
+            "errors"=>{}
+        }
+
+# Additional Notes
+
+## Available Servers
+- https://red.api.accredible.com
+- https://blue.api.accredible.com
+- https://green.api.accredible.com
+- https://qa.api.accredible.com
+- https://performance.api.accredible.com
+- https://sandbox.api.accredible.com
+- http://localhost:3000
+
+## Authentication
+All endpoints require an API key to be provided in the Authorization header.
