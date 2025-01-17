@@ -1,6 +1,8 @@
 # API Documentation for Partner Reporting
 API Documentation for Partner Reporting
 
+Apiary link: https://accrediblepartnerreportingapi.docs.apiary.io/
+
 Contributions
 --------------
 Please branch from `develop` to make changes and submit a Pull Request with a full decsription of your change.
