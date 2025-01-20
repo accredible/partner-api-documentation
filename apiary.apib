@@ -4,6 +4,9 @@ HOST: https://api.accredible.com/
 # Accredible Partner Reporting API
 Accredible Partner Reporting APIs are designed to cater to partners and third parties who require consolidated and detailed insights from multiple credential issuers. This feature enables partners to access aggregated usage data, individual level insights, and comprehensive transcript delivery reporting for issuers, partners, and recipients.
 
+## Authentication
+All endpoints require a Bearer token to be provided in the Authorization header in the format: `Bearer TOKEN`
+
 ## Report Requests [/v1/endorser/report_requests]
 
 ### Request a report [POST]
@@ -12,7 +15,7 @@ Request a report for endorsements.
 + Request (application/json)
     + Headers
     
-            Authorization: string (required)
+            Authorization: Bearer TOKEN (required)
     
     + Attributes (object)
         + report_request (object)
@@ -78,13 +81,5 @@ Request a report for endorsements.
 # Additional Notes
 
 ## Available Servers
-- https://red.api.accredible.com
-- https://blue.api.accredible.com
-- https://green.api.accredible.com
-- https://qa.api.accredible.com
-- https://performance.api.accredible.com
+- https://api.accredible.com
 - https://sandbox.api.accredible.com
-- http://localhost:3000
-
-## Authentication
-All endpoints require an API key to be provided in the Authorization header.
