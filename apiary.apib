@@ -8,9 +8,9 @@ Accredible Partner Reporting APIs are designed to cater to partners and third pa
 All endpoints require a Bearer token to be provided in the Authorization header in the format: `Bearer TOKEN`.
 API tokens can be generated from [Partner Dashboard](https://partner.dashboard.accredible.com/auth/sign-in) -> Settings -> Add an API key.
 
-## Report Requests [/v1/endorser/report_requests]
+## Report Requests [/v1/partner/report_requests]
 
-### Request a report [POST]
+### Request a report [POST /v1/partner/report_requests]
 API for requesting endorsements reports. Upon completion, the report will be delivered via email to all specified recipient addresses (requester_emails).
 
 + Request (application/json)
@@ -77,6 +77,45 @@ API for requesting endorsements reports. Upon completion, the report will be del
             "message": "Something went wrong.",
             "status": "failed_to_produce_report_request_event",
             "errors"=>{}
+        }
+
+### Get report request details [GET /v1/partner/report_requests/{id}]
+API for retrieving the status of a specific report request.
+
++ Parameters
+    + id: `550e8400-e29b-41d4-a716-446655440000` (string, required) - Report request UUID
+
++ Request
+    + Headers
+
+            Authorization: Bearer TOKEN (required)
+
++ Response 200 (application/json)
+    + Body
+
+        {
+            "report_request_id": "550e8400-e29b-41d4-a716-446655440000",
+            "report_status": "REQUESTED"
+        }
+
++ Response 401 (application/json)
+    + Body
+
+        {
+            "code": 401,
+            "message": "Invalid API Key",
+            "status": "unauthorized",
+            "errors": {}
+        }
+
++ Response 404 (application/json)
+    + Body
+
+        {
+            "code": 404,
+            "message": "Report request not found",
+            "status": "not_found",
+            "errors": {}
         }
 
 # Additional Notes
